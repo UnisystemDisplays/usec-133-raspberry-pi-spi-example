@@ -8,5 +8,5 @@ usec-133-raspberry-spi-example:
 			        -I./ -Iusec-133-spi-lib \
 				$(CFLAGS) $(LDFLAGS)
 
-usec-133-raspberry-spi-example:
+clean:
 	rm -f usec-133-raspberry-spi-example *.o *~
