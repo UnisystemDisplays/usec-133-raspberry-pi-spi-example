@@ -18,7 +18,6 @@ static uint8_t screen_cleanup (usec_ctx *ctx);
 static uint8_t demo_1_image_fullscreen (usec_ctx *ctx);
 static uint8_t demo_2_image_partial (usec_ctx *ctx);
 static uint8_t demo_3_image_non_flash (usec_ctx *ctx);
-static uint8_t demo_4_raw_fullscreen (usec_ctx *ctx);
 
 /******************************************************************************/
 
@@ -51,51 +50,44 @@ main (void)
     }
   printf ("[status] screen temperature: %d [degC]\n\r", usec_temp);
 
-  /* cleanup screen - fullscreen update with UPDATE_MODE_INIT mode
-   * (do not modify internal buffer content) */
-  screen_cleanup (ctx);
+  /* main loop */
+  while(1)
+    {
+      /* cleanup screen - fullscreen update with UPDATE_MODE_INIT mode
+       * (do not modify internal buffer content) */
+      screen_cleanup (ctx);
 
-  /* [DEMO 1]
-   * Fullscreen update with UPDATE_MODE_GC16 mode
-   *
-   * UPDATE_MODE_GC16 - is used to update the full display and provide a high
-   * image quality. When GC16 is used with Full Display Update the entire
-   * display will update as the new image is written. If a Partial Update
-   * command is used the only pixels with changing graytone values will update.
-   * The GC16 mode has 16 unique gray levels */
+      /* [DEMO 1]
+       * Fullscreen update with UPDATE_MODE_GC16 mode
+       *
+       * UPDATE_MODE_GC16 - is used to update the full display and provide a
+       * high image quality. When GC16 is used with Full Display Update the
+       * entire display will update as the new image is written. If a Partial
+       * Update command is used the only pixels with changing graytone values
+       * will update. The GC16 mode has 16 unique gray levels */
 
-  demo_1_image_fullscreen (ctx);
-  sleep (2);
-  screen_cleanup (ctx);
+      demo_1_image_fullscreen (ctx);
+      sleep (1);
+      screen_cleanup (ctx);
 
-  /* [DEMO 2]
-   * Parital update with UPDATE_MODE_GC16 mode
-   *
-   * UPDATE_MODE_GC16 - is used to update the full display and provide a high
-   * image quality. When GC16 is used with Full Display Update the entire
-   * display will update as the new image is written. If a Partial Update
-   * command is used the only pixels with changing graytone values will update.
-   * The GC16 mode has 16 unique gray levels */
+      /* [DEMO 2]
+       * Parital update with UPDATE_MODE_GC16 mode
+       */
 
-  demo_2_image_partial (ctx);
-  sleep (2);
+      demo_2_image_partial (ctx);
+      sleep (1);
 
-  /* [DEMO 3]
-   * Parital, non-flash update with UPDATE_MODE_A2 mode
-   *
-   * UPDATE_MODE_A2 - is a fast, non-flash update mode designed for fast paging
-   * turning or simple black/white animation. This mode supports transitions
-   * from and to black or white only. It cannot be used to update to any
-   * graytone other than black or white */
+      /* [DEMO 3]
+       * Parital, non-flash update with UPDATE_MODE_A2 mode
+       *
+       * UPDATE_MODE_A2 - is a fast, non-flash update mode designed for fast
+       * paging turning or simple black/white animation. This mode supports
+       * transitions from and to black or white only. It cannot be used to
+       * update to any graytone other than black or white */
 
-  demo_3_image_non_flash (ctx);
-  sleep (2);
-
-  /* [DEMO 4]
-   * Fullscreen update with UPDATE_MODE_GC16 mode directly from RAW file
-   */
-
-  demo_4_raw_fullscreen (ctx);
+      demo_3_image_non_flash (ctx);
+      sleep (1);
+    }
 
   /* cleanup */
   usec_deinit (ctx);
@@ -327,14 +319,3 @@ demo_3_image_non_flash (usec_ctx *ctx)
 }
 
 /******************************************************************************/
-
-/*
- * demo_4_raw_fullscreen()
- */
-static uint8_t
-demo_4_raw_fullscreen (usec_ctx *ctx)
-{
-  /* TODO */
-
-  return DEMO_OK;
-}

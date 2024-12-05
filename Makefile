@@ -1,12 +1,12 @@
-CFLAGS  = -g -Wall -Wextra
+CFLAGS  = -g -Wall -Wextra -Wno-unused-parameter
 LDFLAGS = -lm -lbcm2835
 
-eink-demo:
-	$(CC) -o eink-demo main.c \
+usec-133-raspberry-spi-example:
+	$(CC) -o usec-133-raspberry-spi-example main.c \
 				platform.c \
 				usec-133-spi-lib/usec_dev.c \
 			        -I./ -Iusec-133-spi-lib \
 				$(CFLAGS) $(LDFLAGS)
 
-clean:
-	rm -f eink-demo *.o *~
+usec-133-raspberry-spi-example:
+	rm -f usec-133-raspberry-spi-example *.o *~
