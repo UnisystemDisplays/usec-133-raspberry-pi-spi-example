@@ -21,7 +21,7 @@ CONNECTIONS
 | RDY  | 24    |
 | RST  | 17    |
 
-__Note:__ *you can easily reconfigure pinout by editting platfrom.h file*
+__Note:__ *you can easily reconfigure pinout by editting platform.h file*
 
 COMPILATION
 -----------
